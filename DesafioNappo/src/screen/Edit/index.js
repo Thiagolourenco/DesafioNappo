@@ -10,7 +10,7 @@ import {
 
 import styles from "./style";
 
-class Adicionar extends Component {
+class Editar extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -25,7 +25,7 @@ class Adicionar extends Component {
         </View>
         <View style={styles.viewOq}>
           <Text style={styles.titulo}>O que você está planejando fazer?</Text>
-          <TextInput style={styles.textInputE} />
+          <TextInput style={styles.textInputE} value="Enviar E-mail" />
         </View>
         <View style={styles.viewOq}>
           <Text style={styles.titulo}>Que horário</Text>
@@ -39,6 +39,9 @@ class Adicionar extends Component {
           </View>
         </View>
         <View style={styles.btnApagar}>
+          <TouchableOpacity>
+            <Text style={styles.textApagar}>Apagar Tarefa</Text>
+          </TouchableOpacity>
           <TouchableOpacity onPress={() => {}} style={styles.btnSalvar}>
             <Text style={styles.btnText}>Salvar</Text>
           </TouchableOpacity>
@@ -48,7 +51,7 @@ class Adicionar extends Component {
   }
 }
 
-Adicionar.navigationOptions = {
+Editar.navigationOptions = {
   header: null
 };
-export default Adicionar;
+export default Editar;
