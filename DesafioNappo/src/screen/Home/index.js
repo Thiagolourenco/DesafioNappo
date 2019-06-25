@@ -12,7 +12,7 @@ class Home extends Component {
   render() {
     return (
       <ImageBackground
-        source={require("../../assets/img/Home1.png")}
+        source={require("../../assets/img/Home.png")}
         style={{ flex: 1 }}
       >
         <View style={styles.container}>
