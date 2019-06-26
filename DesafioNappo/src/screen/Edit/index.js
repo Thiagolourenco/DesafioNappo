@@ -8,9 +8,17 @@ import {
   Image
 } from "react-native";
 
+import firebase from "../../services/firebase";
 import styles from "./style";
 
 class Editar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+
+    this.handleRemover = this.handleRemover.bind(this);
+  }
+
   render() {
     return (
       <View style={styles.container}>

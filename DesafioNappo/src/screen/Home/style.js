@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
   },
   ensoGra: {
     flexDirection: "row",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    marginBottom: 30
   },
   ensolarado: {
     fontSize: 35,
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
   listTarefas: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 40
+    marginTop: 15
   },
   btnTarefas: {
     width: 327,
@@ -83,7 +84,8 @@ const styles = StyleSheet.create({
   btnView: {
     justifyContent: "center",
     alignItems: "center",
-    marginTop: 90
+    marginTop: 90,
+    marginBottom: 24
   },
   imgBtn: {
     width: 60,

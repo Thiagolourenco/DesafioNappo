@@ -8,9 +8,37 @@ import {
   Image
 } from "react-native";
 
+import firebase from "../../services/firebase";
 import styles from "./style";
 
 class Adicionar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      nome: "",
+      hora: "",
+      prioridade: ""
+    };
+
+    this.handleCadastrar = this.handleCadastrar.bind(this);
+  }
+
+  handleCadastrar() {
+    if (this.state.nome.length > 0) {
+      let tarefa = firebase.database().ref("Tarefas");
+      let chave = tarefa.push().key;
+
+      tarefa.child(chave).set({
+        nome: this.state.nome,
+        hora: this.state.hora
+      });
+    }
+
+    setTimeout(() => {
+      this.props.navigation.goBack();
+    }, 3000);
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -25,11 +53,17 @@ class Adicionar extends Component {
         </View>
         <View style={styles.viewOq}>
           <Text style={styles.titulo}>O que você está planejando fazer?</Text>
-          <TextInput style={styles.textInputE} />
+          <TextInput
+            style={styles.textInputE}
+            onChangeText={nome => this.setState({ nome })}
+          />
         </View>
         <View style={styles.viewOq}>
           <Text style={styles.titulo}>Que horário</Text>
-          <Text style={styles.valor}>12:00 AM</Text>
+          <TextInput
+            style={styles.valor}
+            onChangeText={hora => this.setState({ hora })}
+          />
         </View>
         <View style={styles.viewOq}>
           <Text style={styles.titulo}>Qual a prioridade?</Text>
@@ -39,7 +73,10 @@ class Adicionar extends Component {
           </View>
         </View>
         <View style={styles.btnApagar}>
-          <TouchableOpacity onPress={() => {}} style={styles.btnSalvar}>
+          <TouchableOpacity
+            onPress={this.handleCadastrar}
+            style={styles.btnSalvar}
+          >
             <Text style={styles.btnText}>Salvar</Text>
           </TouchableOpacity>
         </View>
@@ -51,4 +88,5 @@ class Adicionar extends Component {
 Adicionar.navigationOptions = {
   header: null
 };
+
 export default Adicionar;
