@@ -5,7 +5,9 @@ import {
   TouchableOpacity,
   ImageBackground,
   Image,
-  FlatList
+  FlatList,
+  Modal,
+  TextInput
 } from "react-native";
 
 import firebase from "../../services/firebase";
@@ -17,6 +19,8 @@ class Home extends Component {
     this.state = {
       task: []
     };
+
+    this.handleEdit = this.handleEdit.bind(this);
   }
 
   componentDidMount() {
@@ -40,6 +44,28 @@ class Home extends Component {
       });
   }
 
+  // renderModal() {
+  //   return <View />;
+  // }
+
+  handleEdit(item) {
+    this.props.navigation.navigate("Editar", item);
+  }
+
+  renderEdit(item) {
+    return (
+      <View style={styles.listTarefas} key={item.key}>
+        <TouchableOpacity
+          onPress={() => this.handleEdit(item.key)}
+          style={styles.btnTarefas}
+        >
+          <View style={styles.viewBola} />
+          <Text style={styles.textBtn}>{item.nome}</Text>
+          <Text style={styles.hora}>{item.hora} ></Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
   render() {
     return (
       <ImageBackground
@@ -62,20 +88,8 @@ class Home extends Component {
           <FlatList
             data={this.state.task}
             keyExtractor={tasks => tasks.key}
-            renderItem={({ item }) => (
-              <View style={styles.listTarefas}>
-                <TouchableOpacity
-                  onPress={() => this.props.navigation.navigate("Editar")}
-                  style={styles.btnTarefas}
-                >
-                  <View style={styles.viewBola} />
-                  <Text style={styles.textBtn}>{item.nome}</Text>
-                  <Text style={styles.hora}>{item.hora} ></Text>
-                </TouchableOpacity>
-              </View>
-            )}
+            renderItem={({ item }) => this.renderEdit(item)}
           />
-
           <View style={styles.btnView}>
             <TouchableOpacity
               onPress={() => this.props.navigation.navigate("Adicionar")}

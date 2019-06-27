@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import {
   Text,
   View,
-  StyleSheet,
   TextInput,
   TouchableOpacity,
-  Image
+  Image,
+  ScrollView
 } from "react-native";
 
 import firebase from "../../services/firebase";
@@ -19,7 +19,6 @@ class Adicionar extends Component {
       hora: "",
       prioridade: ""
     };
-
     this.handleCadastrar = this.handleCadastrar.bind(this);
   }
 
@@ -41,7 +40,7 @@ class Adicionar extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.title}>Editar Tarefa</Text>
           <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
@@ -69,9 +68,10 @@ class Adicionar extends Component {
           <Text style={styles.titulo}>Qual a prioridade?</Text>
           <View style={styles.viewsB}>
             <View style={styles.bola} />
-            <Text style={styles.valor}>Muito importante</Text>
+            <TextInput style={styles.valor} />
           </View>
         </View>
+
         <View style={styles.btnApagar}>
           <TouchableOpacity
             onPress={this.handleCadastrar}
@@ -80,7 +80,7 @@ class Adicionar extends Component {
             <Text style={styles.btnText}>Salvar</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }

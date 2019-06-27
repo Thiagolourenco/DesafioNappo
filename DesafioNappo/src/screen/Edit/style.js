@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   viewsB: {
     flexDirection: "row",
-    marginBottom: 240
+    marginBottom: 190
   },
   bola: {
     width: 20,
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   textApagar: {
     color: "#4A6FFF",
     fontSize: 22,
-    marginBottom: 10
+    marginBottom: 11
   }
 });
 
