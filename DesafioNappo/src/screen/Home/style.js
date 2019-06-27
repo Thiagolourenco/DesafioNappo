@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
     marginBottom: 30
   },
   ensolarado: {
-    fontSize: 35,
+    fontSize: 30,
     fontFamily: "Helvetica Nueu",
     marginLeft: 24,
     color: "#FFF",
-    marginRight: 109
+    marginRight: "8%"
   },
   graus: {
     fontSize: 30,

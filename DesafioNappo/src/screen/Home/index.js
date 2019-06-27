@@ -6,24 +6,30 @@ import {
   ImageBackground,
   Image,
   FlatList,
-  Modal,
-  TextInput
+  Platform,
+  PermissionsAndroid
 } from "react-native";
+import axios from "axios";
 
 import firebase from "../../services/firebase";
 import styles from "./style";
+// import api from "../../services/api";
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      task: []
+      task: [],
+      clima: [],
+      currentLocation: {
+        latitude: -23.682,
+        longitude: -46.875,
+        latitudeBeta: 0.004,
+        longitudeBeta: 0.004
+      }
     };
 
     this.handleEdit = this.handleEdit.bind(this);
-  }
-
-  componentDidMount() {
     firebase
       .database()
       .ref("Tarefas")
@@ -44,9 +50,18 @@ class Home extends Component {
       });
   }
 
-  // renderModal() {
-  //   return <View />;
-  // }
+  async componentDidMount() {
+    const response = await axios.get(
+      `https://api.hgbrasil.com/weather?key=c1c0cb69&lat=${
+        this.state.currentLocation.latitude
+      }&log=${this.state.currentLocation.longitude}&user_ip=remote`
+    );
+    const { results } = response.data;
+
+    this.setState({
+      clima: results
+    });
+  }
 
   handleEdit(item) {
     this.props.navigation.navigate("Editar", item);
@@ -82,8 +97,10 @@ class Home extends Component {
           </View>
           <Text style={styles.subTitulo}>Hoje o Dia Está</Text>
           <View style={styles.ensoGra}>
-            <Text style={styles.ensolarado}>Ensolarado</Text>
-            <Text style={styles.graus}>23º</Text>
+            <Text style={styles.ensolarado}>
+              {this.state.clima.description}
+            </Text>
+            <Text style={styles.graus}>{this.state.clima.temp}º</Text>
           </View>
           <FlatList
             data={this.state.task}
