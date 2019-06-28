@@ -42,7 +42,7 @@ class Adicionar extends Component {
     return (
       <ScrollView style={styles.container}>
         <View style={{ flexDirection: "row" }}>
-          <Text style={styles.title}>Editar Tarefa</Text>
+          <Text style={styles.title}>Nova Tarefa</Text>
           <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
             <Image
               source={require("../../assets/img/Grupo7.png")}

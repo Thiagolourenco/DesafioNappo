@@ -25,6 +25,7 @@ class Home extends Component {
     };
 
     this.handleEdit = this.handleEdit.bind(this);
+
     firebase
       .database()
       .ref("Tarefas")
