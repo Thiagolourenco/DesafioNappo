@@ -57,6 +57,7 @@ class Editar extends Component {
       <ScrollView style={styles.container}>
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.title}>Editar Tarefa</Text>
+
           <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
             <Image
               source={require("../../assets/img/Grupo7.png")}

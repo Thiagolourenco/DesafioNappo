@@ -13,7 +13,6 @@ import axios from "axios";
 
 import firebase from "../../services/firebase";
 import styles from "./style";
-// import api from "../../services/api";
 
 class Home extends Component {
   constructor(props) {
@@ -21,12 +20,8 @@ class Home extends Component {
     this.state = {
       task: [],
       clima: [],
-      currentLocation: {
-        latitude: -23.682,
-        longitude: -46.875,
-        latitudeBeta: 0.004,
-        longitudeBeta: 0.004
-      }
+      latitude: null,
+      longitude: null
     };
 
     this.handleEdit = this.handleEdit.bind(this);
@@ -48,13 +43,30 @@ class Home extends Component {
 
         this.setState(state);
       });
+
+    // Pegando latitude e longitude do usuário
+
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { latitude, longitude } }) => {
+        this.setState({
+          latitude: latitude,
+          longitude: longitude
+        });
+      }, // success
+      () => {}, // erro
+      {
+        timeout: 2000,
+        enableHighAccuracy: true,
+        maximumAge: 1000
+      }
+    );
   }
 
   async componentDidMount() {
     const response = await axios.get(
       `https://api.hgbrasil.com/weather?key=c1c0cb69&lat=${
-        this.state.currentLocation.latitude
-      }&log=${this.state.currentLocation.longitude}&user_ip=remote`
+        this.state.latitude
+      }&log=${this.state.longitude}&user_ip=remote`
     );
     const { results } = response.data;
 
@@ -96,6 +108,7 @@ class Home extends Component {
             />
           </View>
           <Text style={styles.subTitulo}>Hoje o Dia Está</Text>
+
           <View style={styles.ensoGra}>
             <Text style={styles.ensolarado}>
               {this.state.clima.description}
